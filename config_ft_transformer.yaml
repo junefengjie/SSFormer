@@ -1,0 +1,46 @@
+batch_size: 64
+epochs: 300
+eval_every_n_epochs: 1
+fine_tune_from: /home/tfu24/main/runs_multiview/Oct19_08-29-19/checkpoints
+#fine_tune_from: /home/tfu24/main/runs_multiview/Nov06_01-03-09/checkpoints
+trained_with: 'CGCNN'
+log_every_n_steps: 50
+gpu: cuda:0
+vocab_path: 'tokenizer/vocab_full.txt'
+cuda: True
+num_workers: 0
+task: regression
+
+optim:
+  optimizer: Adam
+  init_lr: 0.00001
+  weight_decay: 1e-6
+
+
+dataloader:
+  train_ratio: 0.6
+  valid_ratio: 0.2
+  test_ratio: 0.2
+  use_ratio: 1
+  randomSeed: 2
+
+dataset:
+
+#  data_name: 'jdft2d'
+#  data_name: 'phonos'
+#  data_name: 'dielectric'
+  data_name: 'KVRH'
+#  data_name: 'GVRH'
+#  dataPath: '/home/tfu24/main/benchmark_datasets/jdft2d/slice/jdft2d_slices.csv'
+#  dataPath: '/home/tfu24/main/benchmark_datasets/phonos/slice/phonos_slices.csv'
+#  dataPath: '/home/tfu24/main/benchmark_datasets/dielectric/slice/dielectric_slices.csv'
+  dataPath: '/home/tfu24/main/benchmark_datasets/gvrh/slice/gvrh_slices.csv'
+#  dataPath: '/home/tfu24/main/benchmark_datasets/kvrh/slice/kvrh_slices.csv'
+
+Transformer:
+  ntoken: 4021
+  d_model: 512
+  nhead: 8
+  d_hid: 512
+  nlayers: 6
+  dropout: 0.1
