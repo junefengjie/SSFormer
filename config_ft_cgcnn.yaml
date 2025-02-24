@@ -21,8 +21,6 @@ model:
   n_conv: 3
   n_h: 1
 
-data_name: 'QMOF'
-# data_name: 'hMOF_CO2_0.5'
 
 dataset:
   # root_dir: ./hMOF_cif

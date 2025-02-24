@@ -349,17 +349,6 @@ if __name__ == "__main__":
     print(config)
     config['random_seed'] = args.seed
 
-    if 'hMOF' in config['data_name']:
-        # task_name = 'hMOF'
-        task_name = config['data_name']
-        pressure = config['data_name'].split('_')[-1]
-        if 'small' in config['dataset']['label_dir']:
-            task_name = task_name+'_small'
-    if 'QMOF' in config['data_name']:
-        task_name = 'QMOF'
-        if 'small' in config['dataset']['label_dir']:
-            task_name = task_name+'_small'
-
     # ftf: finetuning from
     if 'scratch' not in config['fine_tune_from']:
         # ftf = config['fine_tune_from'].split('/')[-1]
@@ -371,7 +360,7 @@ if __name__ == "__main__":
 
     log_dir = os.path.join(
         'training_results/finetuning/CGCNN',
-        'CGCNN_{}_{}_{}'.format(ftf, task_name,seed)
+        'CGCNN_{}_{}'.format(ftf,seed)
     )
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
@@ -380,7 +369,7 @@ if __name__ == "__main__":
     fine_tune.train()
     loss, metric = fine_tune.test()
 
-    fn = 'CGCNN_{}_{}_{}.csv'.format(ftf,task_name,seed)
+    fn = 'CGCNN_{}_{}.csv'.format(ftf,seed)
     df = pd.DataFrame([[loss, metric.item()]])
     df.to_csv(
         os.path.join(log_dir, fn),

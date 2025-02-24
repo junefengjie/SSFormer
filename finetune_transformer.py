@@ -199,7 +199,7 @@ class FineTune(object):
         try:
             # checkpoints_folder = os.path.join(self.config['fine_tune_from'], 'checkpoints')
             checkpoints_folder = self.config['fine_tune_from']
-            load_state = torch.load(os.path.join(checkpoints_folder, 'model_transformer_900.pth'),  map_location=self.config['gpu'])
+            load_state = torch.load(os.path.join(checkpoints_folder, 'model_transformer_90.pth'),  map_location=self.config['gpu'])
  
             model_state = model.state_dict()
 
@@ -334,13 +334,6 @@ if __name__ == "__main__":
     print(config)
     config['dataloader']['randomSeed'] = args.seed
 
-    if 'hMOF' in config['dataset']['data_name']:
-        # task_name = 'hMOF'
-        task_name = config['dataset']['data_name']
-        pressure = config['dataset']['data_name'].split('_')[-1]
-    if 'QMOF' in config['dataset']['data_name']:
-        task_name = 'QMOF'
-
     # ftf: finetuning from
     # ptw: pre-trained with
     if config['fine_tune_from'] == 'scratch':
@@ -364,7 +357,6 @@ if __name__ == "__main__":
     fine_tune.train()
     loss, metric = fine_tune.test()
 
-    # fn = 'Trans_{}_{}_{}.csv'.format(ftf, task_name,seed)
     fn = 'Trans_{}_{}.csv'.format(ptw,seed)
     print(fn)
     df = pd.DataFrame([[loss, metric.item()]])
